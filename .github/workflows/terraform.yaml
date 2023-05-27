@@ -34,10 +34,6 @@ jobs:
 
     - name: 'Terraform Plan'
       run: terraform plan -no-color
-      env:
-        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
       
     - name: Terraform Plan Status
       if: steps.plan.outcome == 'failure'
