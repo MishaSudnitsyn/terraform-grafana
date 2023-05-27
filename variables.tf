@@ -8,10 +8,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "key_name" {
-  description = "Name of the SSH key pair"
-}
-
 variable "public_key_path" {
   description = "Public key to be used for the instance"
 }
