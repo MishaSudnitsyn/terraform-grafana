@@ -3,13 +3,12 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "deployer" {
-  public_key = var.public_key_path
+  public_key = var.public_key
 }
 
 resource "aws_instance" "grafana_server" {
   ami                    = "ami-0ab1a82de7ca5889c"
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.grafana_sg.id]
 
   user_data = <<-EOF

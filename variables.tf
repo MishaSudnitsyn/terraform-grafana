@@ -8,7 +8,7 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "public_key_path" {
+variable "public_key" {
   description = "Public key to be used for the instance"
 }
 
