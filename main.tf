@@ -3,12 +3,14 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "deployer" {
-  public_key = var.public_key
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC9A6SRrRDfxeuaSoHebbDOiUYAa9lEc7njIg5P1MzLf3WDw75flZ0Yug690/HeQ/d5HiE/i7CDy4F9mPuTL22zIifgdMDHAfqO4XuK18G3xxK5mlL46oIY41LS3trSKGKawbygCpGdCDcAzpjLRtd6XC/mCqPCjiSEMHVJa7/kpe44OSdES0IQgWKN1PXzxSiW22Ky7XWYwsxMi+lTTS/ZQkpmwqBfDiAGw2q0PQ0o9xsmIu8O8WfngN/Yca3REOF4rzMlIqlSatUeF7pvJK804C0kAybacPhsnnrpK+qg513BBK6HInSvZmW1ecPrsswDhENAeJqSb0PAzrLSARJkshTQT96m+Ai8k3b7vrtzjxGkmCAVrTZ+O7R1JU1Ucnl16q/BpiyC1KUXSTlMcb3TAdxJnpxvz0nj8nMvf5ypcpw2+1JGRXOHOZwXLm5NGb5+VYFfyn3wg0tDdDYzi+RYiZyPQOltx4PULvmhqTwtTXlXXWfzi9+ptm439KuZhvsSAZCrhgY+BDbtlJZ3FE5qR2XzbdrPo98TD5RDc/tUTqOPZ5iSTWNDFR6wtyzwk70JyOTKYbiF6qu+aqCMKRyJ4qxNoPU7dMcfe+FoKcOtilsdOYmSp+dzeuGuWw+qXekowz86Cch0K9LWCZkZWJOCG3KTGC/on60Sy85PveYQ2w== mail@test.com"
+  key_name   = "ec2-key"
 }
 
 resource "aws_instance" "grafana_server" {
   ami                    = "ami-0ab1a82de7ca5889c"
   instance_type          = var.instance_type
+  key_name               = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.grafana_sg.id]
 
   user_data = <<-EOF
