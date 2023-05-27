@@ -18,6 +18,14 @@ resource "aws_security_group" "grafana_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "HTTP"
+    from_port   = var.http_port
+    to_port     = var.http_port
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0

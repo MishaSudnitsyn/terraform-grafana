@@ -14,6 +14,11 @@ variable "grafana_port" {
 }
 
 variable "ssh_port" {
-  description = "Port for SSH on"
+  description = "Port for SSH"
   default = "22"
+}
+
+variable "http_port" {
+  description = "Port for HTTP"
+  default = "80"
 }
